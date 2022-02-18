@@ -6,7 +6,7 @@
 /*   By: rmoriya <rmoriya@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 19:14:26 by rmoriya           #+#    #+#             */
-/*   Updated: 2022/02/18 16:56:57 by rmoriya          ###   ########.fr       */
+/*   Updated: 2022/02/18 19:15:07 by rmoriya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int main()
         line = get_next_line(fd);
         printf("%s", line);
     }
+	free(line);
     close(fd);
     return (0);
 }
