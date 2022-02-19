@@ -6,7 +6,7 @@
 /*   By: rmoriya <rmoriya@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 19:13:46 by rmoriya           #+#    #+#             */
-/*   Updated: 2022/02/18 19:29:35 by rmoriya          ###   ########.fr       */
+/*   Updated: 2022/02/19 09:26:59 by rmoriya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*ft_free_and_strjoin(char *s1, char *s2)
 	}
 	while (s2[j])
 		str[i++] = s2[j++];
-	str[i + j] = '\0';
+	str[i] = '\0';
 	free(s1);
 	return (str);
 }
