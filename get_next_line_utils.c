@@ -6,7 +6,7 @@
 /*   By: rmoriya <rmoriya@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 19:13:46 by rmoriya           #+#    #+#             */
-/*   Updated: 2022/02/20 19:59:32 by rmoriya          ###   ########.fr       */
+/*   Updated: 2022/02/20 20:44:58 by rmoriya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,6 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(const char *s1)
-{
-	char	*res;
-	size_t	i;
-
-	i = 0;
-	if (s1 == NULL)
-		return (NULL);
-	res = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
-	if (res == NULL)
-		return (NULL);
-	while (s1[i])
-	{
-		res[i] = s1[i];
-		i++;
-	}
-	res[i] = '\0';
-	return (res);
-}
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -100,7 +81,7 @@ char	*ft_substr(char const *s, size_t start, size_t len)
 		return (NULL);
 	s_len = ft_strlen(s);
 	if (start >= s_len)
-		return (ft_strdup(""));
+		len = 0;
 	else if ((start + len) > s_len)
 		len = s_len - start;
 	str = (char *)malloc(sizeof(char) * (len + 1));

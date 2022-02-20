@@ -6,7 +6,7 @@
 /*   By: rmoriya <rmoriya@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 19:14:26 by rmoriya           #+#    #+#             */
-/*   Updated: 2022/02/20 20:05:56 by rmoriya          ###   ########.fr       */
+/*   Updated: 2022/02/20 20:44:14 by rmoriya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <fcntl.h>
 #include "get_next_line.h"
 
-int main(int argc, char **argv)
+int main(void)
 {
     int     fd;
     char    *line;
