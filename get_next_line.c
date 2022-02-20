@@ -6,7 +6,7 @@
 /*   By: rmoriya <rmoriya@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 14:25:44 by rmoriya           #+#    #+#             */
-/*   Updated: 2022/02/20 19:58:50 by rmoriya          ###   ########.fr       */
+/*   Updated: 2022/02/20 20:09:56 by rmoriya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,11 @@ char	*get_next_line(int fd)
 {
 	static char	*save;
 	char		*line;
-	bool		is_error;
-	bool		is_eof;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
 		return (NULL);
 	save = ft_read_line(save, fd);
-	is_error = (save == NULL);
-	is_eof = (is_error == false && *save == '\0');
-	if (is_error || is_eof)
+	if (save == NULL || *save == '\0')
 	{
 		save = ft_free_pass(save, NULL);
 		return (NULL);
