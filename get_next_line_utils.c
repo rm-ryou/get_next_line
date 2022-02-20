@@ -6,7 +6,7 @@
 /*   By: rmoriya <rmoriya@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 19:13:46 by rmoriya           #+#    #+#             */
-/*   Updated: 2022/02/19 09:26:59 by rmoriya          ###   ########.fr       */
+/*   Updated: 2022/02/20 19:24:54 by rmoriya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ char	*ft_strchr(const char *s, int c)
 
 	i = 0;
 	if (s == NULL)
-		return (NULL);
-	while (s[i] != c)
+		return (0);
+	while (s[i] != '\0')
 	{
-		if (s[i] == '\0')
-			return (NULL);
+		if (s[i] == c)
+			return ((char *)&s[i]);
 		i++;
 	}
-	return ((char *)&s[i]);
+	return (NULL);
 }
 
 char	*ft_strdup(const char *s1)
@@ -60,29 +60,57 @@ char	*ft_strdup(const char *s1)
 	return (res);
 }
 
-char	*ft_free_and_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
+	size_t	s1_len;
+	size_t	s2_len;
 	size_t	i;
 	size_t	j;
 
-	i = 0;
-	j = 0;
-	if (s1 == NULL)
-		s1 = ft_strdup("");
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
 	if (str == NULL)
 		return (NULL);
-	while (s1[i])
+	i = 0;
+	while (i < s1_len)
 	{
 		str[i] = s1[i];
 		i++;
 	}
-	while (s2[j])
-		str[i++] = s2[j++];
+	j = 0;
+	while (j < s2_len)
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
+}
+
+char	*ft_substr(char const *s, size_t start, size_t len)
+{
+	size_t	i;
+	size_t	s_len;
+	char	*str;
+
+	i = 0;
+	if (s == NULL)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+		return (ft_strdup(""));
+	else if ((start + len) > s_len)
+		len = s_len - start;
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
+		return (NULL);
+	while (s[start + i] != '\0' && i < len)
+	{
+		str[i] = s[start + i];
+		i++;
+	}
 	str[i] = '\0';
-	free(s1);
 	return (str);
 }

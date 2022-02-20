@@ -5,91 +5,84 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmoriya <rmoriya@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 19:13:38 by rmoriya           #+#    #+#             */
-/*   Updated: 2022/02/18 19:33:03 by rmoriya          ###   ########.fr       */
+/*   Created: 2022/02/20 14:25:44 by rmoriya           #+#    #+#             */
+/*   Updated: 2022/02/20 19:42:08 by rmoriya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_read_line(int fd, char *save)
+char	*ft_free_pass(char *for_free, char *newptr)
+{
+	free(for_free);
+	return (newptr);
+}
+
+char	*ft_read_line(char *save, int fd)
 {
 	char	*buff;
 	int		res;
 
-	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buff)
+	buff = (char *)malloc(sizeof(char *) * (BUFFER_SIZE + 1));
+	if (buff == NULL)
 		return (NULL);
-	res = read(fd, buff, BUFFER_SIZE);
-	while (res != 0)
+	while (ft_strchr(save, '\n') == NULL)
 	{
+		res = read(fd, buff, BUFFER_SIZE);
 		if (res == -1)
+		{
+			free(buff);
+			return (NULL);
+		}
+		if (res == 0)
 			break ;
 		buff[res] = '\0';
-		save = ft_free_and_strjoin(save, buff);
-		if (ft_strchr(save, '\n'))
-			break ;
-		res = read(fd, buff, BUFFER_SIZE);
+		save = ft_free_pass(save, ft_strjoin(save, buff));
 	}
 	free(buff);
 	return (save);
 }
 
-static char	*ft_get_line(char *save, char *ptr)
+bool	divide_line(char **save, char **line)
 {
-	char	*line;
-	size_t	i;
+	char	*line_ptr;
+	size_t	front_len;
 
-	if (ft_strlen(save) > 0)
+	line_ptr = ft_strchr(*save, '\n');
+	if (line_ptr != NULL)
+		front_len = line_ptr - *save;
+	else
+		front_len = ft_strlen(*save);
+	*line = ft_substr(*save, 0, front_len + 1);
+	*save = ft_free_pass(*save, ft_substr(*save, front_len + 1, ft_strlen(line_ptr)));
+	if (*line == NULL || *save == NULL)
 	{
-		if (ptr != NULL)
-		{
-			*ptr = '\0';
-			i = ft_strlen(save);
-			line = ft_strdup(save);
-			if (line == NULL)
-				return (NULL);
-			line[i] = '\n';
-			line[i + 1] = '\0';
-		}
-		else
-			line = ft_strdup(save);
-		return (line);
+		free(*line);
+		free(*save);
+		return (false);
 	}
-	else
-		return (NULL);
-}
-
-static char	*ft_save_next_line(char *save, char *ptr)
-{
-	char	*tmp;
-
-	if (ptr != NULL)
-		tmp = ft_strdup(ptr + 1);
-	else
-		tmp = NULL;
-	free(save);
-	return (tmp);
+	return (true);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*save;
 	char		*line;
-	char		*ptr;
+	bool		is_error;
+	bool		is_eof;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
 		return (NULL);
-	save = ft_read_line(fd, save);
-	if (save == NULL)
-		return (NULL);
-	ptr = ft_strchr(save, '\n');
-	line = ft_get_line(save, ptr);
-	if (line == NULL)
+	save = ft_read_line(save, fd);
+	is_error = (save == NULL);
+	is_eof = (is_error == false && *save == '\0');
+	if (is_error || is_eof)
 	{
-		free(save);
+		save = ft_free_pass(save, NULL);
 		return (NULL);
 	}
-	save = ft_save_next_line(save, ptr);
-	return (line);
+	if (divide_line(&save, &line))
+		return (line);
+	else
+		return (NULL);
 }
