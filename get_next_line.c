@@ -6,7 +6,7 @@
 /*   By: rmoriya <rmoriya@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 14:25:44 by rmoriya           #+#    #+#             */
-/*   Updated: 2022/02/20 19:42:08 by rmoriya          ###   ########.fr       */
+/*   Updated: 2022/02/20 19:58:50 by rmoriya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,17 @@ char	*ft_read_line(char *save, int fd)
 bool	divide_line(char **save, char **line)
 {
 	char	*line_ptr;
+	size_t	ptr_len;
 	size_t	front_len;
 
 	line_ptr = ft_strchr(*save, '\n');
 	if (line_ptr != NULL)
-		front_len = line_ptr - *save;
+		front_len = line_ptr - *save + 1;
 	else
 		front_len = ft_strlen(*save);
-	*line = ft_substr(*save, 0, front_len + 1);
-	*save = ft_free_pass(*save, ft_substr(*save, front_len + 1, ft_strlen(line_ptr)));
+	*line = ft_substr(*save, 0, front_len);
+	ptr_len = ft_strlen(line_ptr);
+	*save = ft_free_pass(*save, ft_substr(*save, front_len, ptr_len));
 	if (*line == NULL || *save == NULL)
 	{
 		free(*line);
