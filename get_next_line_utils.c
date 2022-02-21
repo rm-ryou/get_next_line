@@ -6,7 +6,7 @@
 /*   By: rmoriya <rmoriya@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 19:13:46 by rmoriya           #+#    #+#             */
-/*   Updated: 2022/02/20 20:44:58 by rmoriya          ###   ########.fr       */
+/*   Updated: 2022/02/21 18:26:19 by rmoriya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strchr(const char *s, int c)
 
 	i = 0;
 	if (s == NULL)
-		return (0);
+		return (NULL);
 	while (s[i] != '\0')
 	{
 		if (s[i] == c)
