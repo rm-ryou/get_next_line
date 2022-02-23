@@ -6,7 +6,7 @@
 /*   By: rmoriya <rmoriya@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 19:13:46 by rmoriya           #+#    #+#             */
-/*   Updated: 2022/02/21 18:26:19 by rmoriya          ###   ########.fr       */
+/*   Updated: 2022/02/21 18:25:05 by rmoriya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ char	*ft_strchr(const char *s, int c)
 	}
 	return (NULL);
 }
-
 
 char	*ft_strjoin(char *s1, char *s2)
 {
