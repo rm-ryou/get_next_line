@@ -6,19 +6,19 @@
 /*   By: rmoriya <rmoriya@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 14:25:44 by rmoriya           #+#    #+#             */
-/*   Updated: 2022/02/20 20:09:56 by rmoriya          ###   ########.fr       */
+/*   Updated: 2022/02/24 08:29:42 by rmoriya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_free_pass(char *for_free, char *newptr)
+static char	*ft_free_pass(char *for_free, char *newptr)
 {
 	free(for_free);
 	return (newptr);
 }
 
-char	*ft_read_line(char *save, int fd)
+static char	*ft_read_line(char *save, int fd)
 {
 	char	*buff;
 	int		res;
@@ -43,7 +43,7 @@ char	*ft_read_line(char *save, int fd)
 	return (save);
 }
 
-bool	divide_line(char **save, char **line)
+static bool	divide_line(char **save, char **line)
 {
 	char	*line_ptr;
 	size_t	ptr_len;

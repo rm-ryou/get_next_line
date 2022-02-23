@@ -6,7 +6,7 @@
 /*   By: rmoriya <rmoriya@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 19:13:46 by rmoriya           #+#    #+#             */
-/*   Updated: 2022/02/21 18:25:05 by rmoriya          ###   ########.fr       */
+/*   Updated: 2022/02/24 08:29:58 by rmoriya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	*ft_substr(char const *s, size_t start, size_t len)
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (str == NULL)
 		return (NULL);
-	while (s[start + i] != '\0' && i < len)
+	while (i < len && s[start + i] != '\0')
 	{
 		str[i] = s[start + i];
 		i++;
